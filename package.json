@@ -1,0 +1,26 @@
+{
+  "name": "vnjson-pure-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-connect": "^5.7.0",
+    "gulp-concat": "^2.6.1",
+    "scenes-to-json": "^0.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vnjson/vnjson-pure-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vnjson/vnjson-pure-template/issues"
+  },
+  "homepage": "https://github.com/vnjson/vnjson-pure-template#readme"
+}
