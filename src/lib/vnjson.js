@@ -11,7 +11,7 @@
 	'use strict';
 
 class Vnjson {
-	version = '1.6.1';
+	version = '1.6.2';
 	//current object
 	ctx = {};
 	//loaded scenes
@@ -33,10 +33,11 @@ class Vnjson {
 	 */
 	current = {
 		index: 0,
-		labelName: 'label',
-		sceneName: 'scene',
+		labelName: 'entry',
+		sceneName: '$root',
 		character: {id: '$', name: 'Norrator'},
-		layer: {
+		render: {
+			screen: undefined,
 			audio: undefined,
 			scene: undefined, //bg
 			show: {}//left right center show
@@ -50,6 +51,7 @@ class Vnjson {
 			points: 0
 		},
 		tree: [],
+		allAssets: [],
 		assets: []
 	};
 	/**
@@ -174,6 +176,7 @@ class Vnjson {
 				if(!/\./i.test(pathname)){		
 					this.current.labelName = path[0];
 					this.emit('init', false);
+
 				}
 				//scene.label
 				if(/\./i.test(pathname)){
@@ -181,7 +184,7 @@ class Vnjson {
 						this.current.labelName = path[1];
 						this.emit('init', true);
 				};
-			}
+			};
 			this.on('jump', jumpHandler);
 	}
 	/**

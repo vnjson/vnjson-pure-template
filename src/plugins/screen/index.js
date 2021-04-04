@@ -28,6 +28,7 @@ return validation.passes();
 				if(prevScreen){	
 					$(`.screen__${prevScreen}`).hide();
 				}
+				this.current.render.screen = screenName;
 				$(`.screen__${screenName}`).show();
 					prevScreen = screenName;
 		}

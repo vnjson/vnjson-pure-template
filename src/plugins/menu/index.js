@@ -11,6 +11,8 @@ $('.game-menu').html('');
 $('.game-menu').show();
 
 
+
+
 	for(var [label, menuItem ] of Object.entries(menuObj)){
 		
 		if(label==='$'){
@@ -45,4 +47,6 @@ $( ".game-menu" ).on( "click", ".game-menu__menu-item", clickHundler);
 }
 
 this.on('menu', menu);
+
+
 }

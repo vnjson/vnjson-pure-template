@@ -1,67 +1,81 @@
 function loadAssets (){
-/*
+
+
+
+
+var getAssets = _=>{
+  this.emit('preload')
 var i = 0;
 
-var load = ()=>{
+var load = _=>{
+	var asset = this.current.assets[i];
 	
-	var assets = this.TREE.$root.assets;
-
-	
-	if(/.png|.jpg/i.test( assets[i].url)){
-	
-  let img = new Image();
-       img.src =  assets[i].url;
+	if(/\.mp3|\.wav/i.test(asset.url)){
+    var sound = new Howl({src: asset.url})
+    		sound.on('load', _=>{
+    			this.$store[asset.name] = sound;
+ 					if( this.current.assets.length-1>=++i){
+            this.emit('load', asset)
+ 						load();
+ 						
+ 					}else{
+            this.emit('postload') 
+ 					}							
+				});
+ 
+  }
+  else if(/\.png|\.jpg|.webp/i.test(asset.url)){
+  	
+      let img = new Image();
+       img.src =  asset.url;
        img.onload = ()=>{
-            
-       		
-             if( assets.length-1>=++i){
-             
-             		load()
-             }
-       };
-  } 
-}
-window.addEventListener("load", _=>{
-	load()
-  
-});
+       		this.$store[asset.name] =	asset.url
+       		if(this.current.assets.length-1>=++i){
+            this.emit('load', asset)
+       			load();
 
-*/
+       		}else{
+            this.emit('postload')
+       			
+       		};
+       };  
+  }
+  else{
+  	console.log(asset.url +' Формат не поддерживается')
+  }
+};
+
+load();
+
+
+};
+
 var setAllAssets = ()=>{
 
     for(let [scene, body] of Object.entries(this.TREE)){
         this.current.assets = this.current.assets.concat(body.assets);
     };
-    this.emit('setAllAssets');
+    getAssets();
 }
 
+/*
+this.on('preload', scene=>{
 
+	var assets = this.TREE[this.current.sceneName].assets;
+  this.current.assets = this.current.assets.concat(assets);
+
+  this.emit('setAssets');
+})
+
+*/
 
 this.on('setTree', _=>{
 
-var { assets } = this.TREE.$root
-
-if(assets==='all'){
-     setAllAssets();
-}
-else if(assets==='once'){
-
-}
-
-else{
-    setAllAssets()
-}
-
-})
-this.on('setAllAssets', _=>{
-  this.current.assets.forEach(asset=>{
-      if(/\mp3|\.wav/i.test(asset.url)){
-        this.$store[asset.name] = new Howl({src: asset.url})
-      }
-  
-  })
+  setAllAssets();
 
 });
+
+
 
 
 }

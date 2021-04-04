@@ -1,7 +1,8 @@
 
 - screen: stream
   $: Привет мир
-
+  sound: item
+  k: false
 - Начинаю игру
 
 - menu:
